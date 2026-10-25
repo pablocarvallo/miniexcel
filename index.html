@@ -271,12 +271,13 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
 .pad-in{max-width:560px;margin:0 auto}
 .pad-top{display:flex;justify-content:flex-end;align-items:center;height:40px}
 .done{border:0;background:none;color:var(--accent);font:600 16px var(--font);padding:8px 4px}
-.keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:50px;gap:6px}
+.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:50px;gap:6px}
 .keys button{border:0;border-radius:10px;background:var(--key);color:var(--ink);font:400 25px/1 var(--font);
   font-variant-numeric:tabular-nums;box-shadow:0 1px 0 var(--key-sh);display:grid;place-items:center}
 .keys button.fn{background:var(--key-fn);font-size:21px}
+.keys button.op{color:var(--accent);font-size:27px}
 .keys button.abc{font:600 15px/1 var(--font);letter-spacing:.05em}
-.keys button.enter{grid-column:4;grid-row:3 / span 2;background:var(--accent-fill);color:var(--on-accent);box-shadow:var(--ds-shadow-btn);
+.keys button.enter{grid-column:5;grid-row:3 / span 2;background:var(--accent-fill);color:var(--on-accent);box-shadow:var(--ds-shadow-btn);
   font:600 16px/1 var(--font);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
 .keys button.down{background:var(--key-fn)}
 .keys button.fn.down{background:var(--key)}
@@ -296,10 +297,10 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
       <span class="ref" id="refLbl" aria-live="polite">A1</span>
       <div class="inp">
         <div class="nd on" id="nd" role="textbox" aria-label="Contenido de la celda, teclado numérico">
-          <span class="v" id="ndV"></span><i class="caret" id="ndCaret" hidden></i><span class="ph" id="ndPh">Escribe una cifra</span>
+          <span class="v" id="ndV"></span><i class="caret" id="ndCaret" hidden></i><span class="ph" id="ndPh">Cifra o fórmula</span>
         </div>
         <input id="inTxt" type="text" inputmode="text" enterkeyhint="enter" autocomplete="off" autocorrect="off" autocapitalize="sentences" spellcheck="false"
-               placeholder="Texto o =SUMA(B1:B9)" aria-label="Contenido de la celda, teclado de texto" tabindex="-1">
+               placeholder="Texto o fórmula, ej. =A1+B1" aria-label="Contenido de la celda, teclado de texto" tabindex="-1">
       </div>
     </div>
     <div class="tools">
@@ -328,19 +329,22 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
   <div class="pad-in">
     <div class="pad-top"><button type="button" class="done" data-k="done">Listo</button></div>
     <div class="keys">
-      <button type="button" data-k="1">1</button>
-      <button type="button" data-k="2">2</button>
-      <button type="button" data-k="3">3</button>
+      <button type="button" data-k="7">7</button>
+      <button type="button" data-k="8">8</button>
+      <button type="button" data-k="9">9</button>
+      <button type="button" class="fn op" data-k="op" data-op="/" aria-label="Dividir">÷</button>
       <button type="button" class="fn" data-k="back" aria-label="Borrar">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6-7z"/><path d="M12 9.5l5 5M17 9.5l-5 5"/></svg>
       </button>
       <button type="button" data-k="4">4</button>
       <button type="button" data-k="5">5</button>
       <button type="button" data-k="6">6</button>
-      <button type="button" class="fn" data-k="sign" aria-label="Cambiar signo">±</button>
-      <button type="button" data-k="7">7</button>
-      <button type="button" data-k="8">8</button>
-      <button type="button" data-k="9">9</button>
+      <button type="button" class="fn op" data-k="op" data-op="*" aria-label="Multiplicar">×</button>
+      <button type="button" class="fn op" data-k="eq" aria-label="Igual: empezar una fórmula">=</button>
+      <button type="button" data-k="1">1</button>
+      <button type="button" data-k="2">2</button>
+      <button type="button" data-k="3">3</button>
+      <button type="button" class="fn op" data-k="op" data-op="-" aria-label="Restar">−</button>
       <button type="button" class="enter" data-k="enter" aria-label="Intro: confirmar y bajar a la siguiente celda">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v7a3 3 0 0 1-3 3H5"/><path d="M9 11l-4 4 4 4"/></svg>
         Intro
@@ -348,6 +352,7 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
       <button type="button" class="fn abc" data-k="abc" aria-label="Cambiar a teclado de texto">ABC</button>
       <button type="button" data-k="0">0</button>
       <button type="button" data-k=",">,</button>
+      <button type="button" class="fn op" data-k="op" data-op="+" aria-label="Sumar">+</button>
     </div>
   </div>
 </div>
@@ -390,7 +395,7 @@ function one(p){ return {r1:p.r,c1:p.c,r2:p.r,c2:p.c}; }
 function rstr(q){ return (q.r1===q.r2&&q.c1===q.c2) ? ref(q.r1,q.c1) : ref(q.r1,q.c1)+':'+ref(q.r2,q.c2); }
 function isMulti(){ return sel.r1!==sel.r2 || sel.c1!==sel.c2; }
 function curVal(){ return mode==='num' ? numVal : inTxt.value; }
-function isFx(){ return editing && mode==='txt' && /^\s*=/.test(inTxt.value); }
+function isFx(){ return editing && /^\s*=/.test(curVal()); }
 function caretAt(el,n){ try{ el.setSelectionRange(n,n); }catch(_){} }
 
 /* Cifras al estilo chileno: punto de miles, coma decimal (también acepta punto decimal) */
@@ -441,7 +446,8 @@ function tokenize(s){
       i+=m[0].length; continue;
     }
     if((m=/^[A-Za-zÁÉÍÓÚÑáéíóúñ_.]+/.exec(rest))){ out.push({k:'name',v:m[0].toUpperCase()}); i+=m[0].length; continue; }
-    if('+-*/^():;,'.indexOf(ch)>=0){ out.push({k:ch}); i++; continue; }
+    if(ch==='\u00D7'||ch==='\u00F7'||ch==='\u2212'){ out.push({k:ch==='\u00D7'?'*':ch==='\u00F7'?'/':'-'}); i++; continue; }
+    if('+-*/():;,'.indexOf(ch)>=0){ out.push({k:ch}); i++; continue; }
     throw 'syntax';
   }
   return out;
@@ -452,8 +458,7 @@ function parse(toks){
   function take(){ return toks[p++]; }
   function expr(){ var n=term(); while(is('+')||is('-')){ var k=take().k; n={k:k,a:n,b:term()}; } return n; }
   function term(){ var n=unary(); while(is('*')||is('/')){ var k=take().k; n={k:k,a:n,b:unary()}; } return n; }
-  function unary(){ if(is('-')){ take(); return {k:'neg',a:unary()}; } if(is('+')){ take(); return {k:'pos',a:unary()}; } return power(); }
-  function power(){ var n=prim(); if(is('^')){ take(); n={k:'^',a:n,b:unary()}; } return n; }
+  function unary(){ if(is('-')){ take(); return {k:'neg',a:unary()}; } if(is('+')){ take(); return {k:'pos',a:unary()}; } return prim(); }
   function prim(){
     var t=take(); if(!t) throw 'syntax';
     if(t.k==='num') return t;
@@ -511,7 +516,6 @@ function ev(n,get){
     case '-': return num(a.v-b.v);
     case '*': return num(a.v*b.v);
     case '/': return b.v===0 ? ERR('#¡DIV/0!') : num(a.v/b.v);
-    case '^': return num(Math.pow(a.v,b.v));
   }
   return ERR('#¡VALOR!');
 }
@@ -542,9 +546,9 @@ function recalc(){
 }
 function store(r,c,v){
   v=(v||'').trim();
-  if(v==='-'||v===',') v='';
+  if(v==='-'||v===','||v==='=') v='';
   if(v[0]==='='){
-    v=v.toUpperCase().replace(/\s+/g,'');
+    v=v.toUpperCase().replace(/\s+/g,'').replace(/\u00D7/g,'*').replace(/\u00F7/g,'/').replace(/\u2212/g,'-');
     var d=0; for(var i=0;i<v.length;i++){ if(v[i]==='(') d++; else if(v[i]===')') d--; }
     while(d-->0) v+=')';
   } else if(v && v[0]!=="'"){
@@ -556,7 +560,7 @@ function store(r,c,v){
 /* ---------- Teclado sugerido ---------- */
 function kindOf(s){ if(!s) return null; if(s[0]==='=') return 'fx'; if(s[0]==="'") return 'txt'; return parseNum(s)!==null ? 'num' : 'txt'; }
 function suggestMode(p){
-  var k=kindOf(raw[p.r][p.c]); if(k) return k==='num' ? 'num' : 'txt';
+  var k=kindOf(raw[p.r][p.c]); if(k) return k==='txt' ? 'txt' : 'num';
   for(var r=p.r-1;r>=0;r--){ var u=kindOf(raw[r][p.c]); if(u) return u==='txt' ? 'txt' : 'num'; }
   return sticky;
 }
@@ -646,16 +650,40 @@ inTxt.addEventListener('keydown',function(e){
 nd.addEventListener('click',function(){ if(!(editing && mode==='num')) edit('num'); });
 
 /* Teclado numérico propio */
+var OPS='+-*/';
 function padInput(ch){
+  var v=numVal;
+  if(v[0]==='='){
+    var tok=/[0-9,]*$/.exec(v)[0], before=v.slice(0,v.length-tok.length);
+    if(ch===','){
+      if(tok.indexOf(',')>=0 || /[A-Za-z]$/.test(before)) return;
+      if(tok==='') ch='0,';
+    }
+    numVal=v+ch; pickSpan=null; paint(); return;
+  }
   if(ch===','){
-    if(numVal.indexOf(',')>=0) return;
-    if(numVal===''||numVal==='-') numVal+='0';
-  } else if(numVal==='0'){ numVal=''; }
-  else if(numVal==='-0'){ numVal='-'; }
-  numVal+=ch; paint();
+    if(v.indexOf(',')>=0) return;
+    if(v===''||v==='-') v+='0';
+  } else if(v==='0'){ v=''; }
+  else if(v==='-0'){ v='-'; }
+  numVal=v+ch; paint();
 }
-function padBack(){ if(numVal){ numVal=numVal.slice(0,-1); paint(); } }
-function padSign(){ numVal = numVal[0]==='-' ? numVal.slice(1) : '-'+numVal; paint(); }
+function padBack(){ if(numVal){ numVal=numVal.slice(0,-1); pickSpan=null; paint(); } }
+function padEq(){ if(numVal[0]!=='='){ numVal='='+numVal; pickSpan=null; paint(); } }
+/* Una operación convierte la celda en fórmula; un − al comienzo escribe una cifra negativa */
+function padOp(op){
+  var v=numVal;
+  if(v===''){ if(op==='-'){ numVal='-'; paint(); } return; }
+  if(v==='-') return;
+  if(v[0]!=='=') v='='+v;
+  var last=v.slice(-1);
+  if(last==='='||last==='('||last===';'){ if(op!=='-'){ numVal=v; paint(); return; } }
+  else if(OPS.indexOf(last)>=0){
+    if(!(op==='-' && (last==='*'||last==='/'))) v=v.slice(0,-1);
+    if(v.slice(-1)==='=' && op!=='-'){ numVal=v; paint(); return; }
+  }
+  numVal=v+op; pickSpan=null; paint();
+}
 function stopRepeat(){ clearTimeout(repTimer); repTimer=0; }
 pad.addEventListener('mousedown',function(e){ e.preventDefault(); });
 pad.addEventListener('pointerdown',function(e){
@@ -664,7 +692,8 @@ pad.addEventListener('pointerdown',function(e){
   var k=b.dataset.k;
   if(/^[0-9,]$/.test(k)) padInput(k);
   else if(k==='back'){ padBack(); stopRepeat(); repTimer=setTimeout(function rep(){ padBack(); repTimer=setTimeout(rep,70); },420); }
-  else if(k==='sign') padSign();
+  else if(k==='op') padOp(b.dataset.op);
+  else if(k==='eq') padEq();
 });
 function keyUp(e){
   var b=e.target && e.target.closest && e.target.closest('button[data-k]');
@@ -685,21 +714,21 @@ pad.addEventListener('click',function(e){
 /* ---------- Tocar celdas dentro de una fórmula ---------- */
 var FXRE=/^=\s*(SUMA|PROMEDIO|SUM|AVERAGE|PROM)\s*\(\s*(\$?[A-Z]+\$?\d+(\s*:\s*\$?[A-Z]+\$?\d+)?)?\s*\)?\s*$/i;
 function pickCtx(){
-  var el=inTxt, v=el.value;
+  var v=curVal();
   if(!/^\s*=/.test(v)) return null;
   var m=FXRE.exec(v); if(m) return {t:'fn',fn:m[1].toUpperCase()};
-  var s=el.selectionStart, e=el.selectionEnd;
-  if(s==null){ s=e=v.length; }
+  var s=v.length, e=v.length;
+  if(mode==='txt' && inTxt.selectionStart!=null){ s=inTxt.selectionStart; e=inTxt.selectionEnd; }
   if(pickSpan && pickSpan.val===v && s===pickSpan.to) return {t:'ins',before:v.slice(0,pickSpan.from),after:v.slice(pickSpan.to)};
   var prev=v.slice(0,s).replace(/\s+$/,'').slice(-1);
-  if(prev && '=(;,+-*/^:'.indexOf(prev)>=0) return {t:'ins',before:v.slice(0,s),after:v.slice(e)};
+  if(prev && '=(;,+-*/:'.indexOf(prev)>=0) return {t:'ins',before:v.slice(0,s),after:v.slice(e)};
   return null;
 }
 function applyPick(ctx,rs){
-  var el=inTxt, v, caret;
+  var v, caret;
   if(ctx.t==='fn'){ v='='+ctx.fn+'('+rs+')'; caret=v.length-1; pickSpan=null; }
   else { v=ctx.before+rs+ctx.after; caret=ctx.before.length+rs.length; pickSpan={from:ctx.before.length,to:caret,val:v}; }
-  el.value=v; caretAt(el,caret);
+  if(mode==='txt'){ inTxt.value=v; caretAt(inTxt,caret); } else numVal=v;
   paint();
 }
 function refsIn(v){
@@ -805,8 +834,7 @@ function insertFn(F){
     rs=autoRange(act);
   }
   var v='='+F+'('+rs+')';
-  edit('txt', v);
-  caretAt(inTxt, v.length-1);
+  edit('num', v);
   pickSpan=null; paint();
 }
 sumBtn.addEventListener('click',function(){ insertFn('SUMA'); });
@@ -836,7 +864,8 @@ document.addEventListener('keydown',function(e){
   if(editing && mode==='num'){
     if(/^[0-9]$/.test(k)){ e.preventDefault(); padInput(k); }
     else if(k===','||k==='.'){ e.preventDefault(); padInput(','); }
-    else if(k==='-'){ e.preventDefault(); padSign(); }
+    else if(OPS.indexOf(k)>=0){ e.preventDefault(); padOp(k); }
+    else if(k==='='){ e.preventDefault(); padEq(); }
     else if(k==='Backspace'){ e.preventDefault(); padBack(); }
     else if(k==='Enter'){ e.preventDefault(); commitNext(1,0); }
     else if(k==='Tab'){ e.preventDefault(); commitNext(0, e.shiftKey?-1:1); }
@@ -855,9 +884,9 @@ document.addEventListener('keydown',function(e){
   if(k==='Enter'||k==='F2'){ e.preventDefault(); edit(suggestMode(act)); return; }
   if(k==='Backspace'||k==='Delete'){ e.preventDefault(); clearSel(); return; }
   if(k.length===1){
-    if(/[0-9,.\-]/.test(k)){
+    if(/[0-9,.\-=]/.test(k)){
       e.preventDefault(); edit('num','');
-      if(k==='-') padSign(); else padInput(k==='.'?',':k);
+      if(k==='-') padOp('-'); else if(k==='=') padEq(); else padInput(k==='.'?',':k);
     } else {
       edit('txt','');
     }
@@ -890,7 +919,7 @@ function renderStatus(){
     html+='<div class="notice"><span>'+(k===1?'1 celda borrada':k+' celdas borradas')+'</span><button type="button" data-act="undo">Deshacer</button></div>';
   }
   if(empty){
-    html+='<p class="hint">Toca una celda para escribir y usa <b>Intro</b> para pasar a la siguiente. Cambia entre <b>123</b> y <b>ABC</b> según lo que ingreses, y usa <b>Suma</b> o <b>Promedio</b> para agregar una fórmula.</p>';
+    html+='<p class="hint">Toca una celda para escribir y usa <b>Intro</b> para pasar a la siguiente. Para una fórmula, toca <b>=</b> y arma la cuenta con <b>+ − × ÷</b>, tocando las celdas que quieras usar. <b>Suma</b> y <b>Promedio</b> suman o promedian un rango.</p>';
   } else {
     var s=stats();
     html+='<div class="lbl"><b>'+s.label+'</b><span>'+(s.n===0?'sin cifras':s.n===1?'1 cifra':s.n+' cifras')+'</span></div>'+
@@ -904,10 +933,10 @@ function paint(){
   var multi=isMulti();
   if(!editing){ setMode(suggestMode(act)); loadEditor(); }
   var live = editing ? (mode==='num' ? fmtTyping(numVal) : inTxt.value) : '';
-  var refs = (editing && mode==='txt' && /^\s*=/.test(live)) ? refsIn(live) : [];
+  var refs = (editing && /^\s*=/.test(curVal())) ? refsIn(curVal()) : [];
   for(var r=0;r<R;r++) for(var c=0;c<C;c++){
     var el=cellEl[r][c], sp=el.firstChild, cls='c', txt='', isAct=(r===act.r&&c===act.c);
-    if(editing && isAct){ cls+=' ed'+(mode==='num'?' edn':''); txt=live; }
+    if(editing && isAct){ cls+=' ed'+(mode==='num'&&numVal[0]!=='='?' edn':''); txt=live; }
     else {
       var v=vals[r][c];
       if(v.t==='num'){ cls+=' n'; txt=fmt(v.v); }
@@ -919,7 +948,7 @@ function paint(){
     for(var i=0;i<refs.length;i++){ var q=refs[i]; if(r>=q.r1&&r<=q.r2&&c>=q.c1&&c<=q.c2){ cls+=' rf'; break; } }
     if(el.className!==cls) el.className=cls;
     if(sp.textContent!==txt) sp.textContent=txt;
-    if(editing && isAct && mode!=='num') sp.scrollLeft=sp.scrollWidth;
+    if(editing && isAct && cls.indexOf('edn')<0) sp.scrollLeft=sp.scrollWidth;
   }
   colH.forEach(function(h,c){ h.classList.toggle('on', c>=sel.c1&&c<=sel.c2); });
   rowH.forEach(function(h,r){ h.classList.toggle('on', r>=sel.r1&&r<=sel.r2); });
