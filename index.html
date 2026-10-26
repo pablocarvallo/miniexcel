@@ -9,176 +9,68 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Planilla">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#EFF3FB" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0A1224" media="(prefers-color-scheme: dark)">
-<link rel="apple-touch-icon" href="icon-180.png?v=1">
-<link rel="icon" type="image/png" href="icon-180.png?v=1">
+<meta name="theme-color" content="#F3F2F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1B1B1B" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png?v=2">
+<link rel="icon" type="image/png" href="icon-180.png?v=2">
 <link rel="manifest" href="manifest.webmanifest">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;font-size:14px}
 img{max-width:100%}
-/*DS:TOKENS:START*/
-/* ── Domésticas · sistema de diseño común (v1) ──────────────────────────────
-   Paleta: #2950F4 · #4D78F3 · #719DF6 · #99C2F8 · #BDEBFB, con el azul marino #182D4A de fondo oscuro.
-   Estilo iOS 27: tipografía del sistema (SF Pro), tarjetas blancas sobre fondo agrupado,
-   barras y botones de vidrio, cápsulas, esquinas amplias. Igual en todas las apps de la casa. */
-:root {
-  --ds-b1: #2950F4; --ds-b2: #4D78F3; --ds-b3: #719DF6; --ds-b4: #99C2F8; --ds-b5: #BDEBFB; --ds-navy: #182D4A;
-  --ds-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui, "Helvetica Neue", Arial, sans-serif;
-  --ds-font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", system-ui, "Helvetica Neue", Arial, sans-serif;
-  --ds-font-round: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --ds-font-mono: ui-monospace, "SF Mono", Menlo, monospace;
-  --ds-r-card: 24px; --ds-r-inner: 16px; --ds-r-field: 14px; --ds-r-sheet: 34px; --ds-r-pill: 999px;
-
-  --ds-bg: #EFF3FB;
-  --ds-bg-top: #DFE9FD;
-  --ds-surface: #FFFFFF;
-  --ds-surface-2: #F3F6FD;
-  --ds-fill: rgba(41, 80, 244, 0.07);
-  --ds-fill-2: rgba(41, 80, 244, 0.13);
-  --ds-ink: #0E1B33;
-  --ds-ink-2: #55617A;
-  --ds-ink-3: #8691A8;
-  --ds-line: rgba(24, 45, 74, 0.12);
-  --ds-line-2: rgba(24, 45, 74, 0.2);
-  --ds-tint: #2950F4;
-  --ds-tint-soft: #E5ECFE;
-  --ds-btn: #2950F4;
-  --ds-on-btn: #FFFFFF;
-  --ds-pos: #157A43; --ds-pos-soft: #DDF4E6;
-  --ds-neg: #D1281C; --ds-neg-soft: #FDE8E6;
-  --ds-warn: #A35500; --ds-warn-soft: #FFF0D9;
-  --ds-hero: radial-gradient(120% 90% at 100% 0%, rgba(189, 235, 251, 0.45) 0%, rgba(189, 235, 251, 0) 55%), linear-gradient(150deg, #4D78F3 0%, #2950F4 58%, #2141D6 100%);
-  --ds-hero-ink: #FFFFFF;
-  --ds-hero-ink-2: rgba(255, 255, 255, 0.84);
-  --ds-hero-line: rgba(255, 255, 255, 0.28);
-  --ds-hero-glass: rgba(255, 255, 255, 0.18);
-  --ds-glass: rgba(255, 255, 255, 0.7);
-  --ds-glass-strong: rgba(255, 255, 255, 0.86);
-  --ds-glass-line: rgba(255, 255, 255, 0.85);
-  --ds-glass-edge: rgba(14, 27, 51, 0.1);
-  --ds-glass-blur: blur(22px) saturate(1.8);
-  --ds-shadow-1: 0 1px 2px rgba(24, 45, 74, 0.05), 0 4px 14px rgba(24, 45, 74, 0.05);
-  --ds-shadow-2: 0 12px 32px rgba(24, 45, 74, 0.16), 0 2px 8px rgba(24, 45, 74, 0.08);
-  --ds-shadow-btn: inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 6px 16px rgba(41, 80, 244, 0.26);
-  --ds-scrim: rgba(14, 27, 51, 0.36);
-  --ds-chart-1: #2950F4; --ds-chart-2: #719DF6; --ds-chart-3: #99C2F8; --ds-chart-4: #BDEBFB;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ds-bg: #0A1224;
-    --ds-bg-top: #13244A;
-    --ds-surface: #152340;
-    --ds-surface-2: #1C2C4D;
-    --ds-fill: rgba(113, 157, 246, 0.12);
-    --ds-fill-2: rgba(113, 157, 246, 0.2);
-    --ds-ink: #EEF3FF;
-    --ds-ink-2: #A9B6D0;
-    --ds-ink-3: #77859F;
-    --ds-line: rgba(189, 235, 251, 0.11);
-    --ds-line-2: rgba(189, 235, 251, 0.2);
-    --ds-tint: #8EB0FA;
-    --ds-tint-soft: rgba(113, 157, 246, 0.18);
-    --ds-btn: #3A62F5;
-    --ds-on-btn: #FFFFFF;
-    --ds-pos: #5DD68E; --ds-pos-soft: rgba(93, 214, 142, 0.14);
-    --ds-neg: #FF8A80; --ds-neg-soft: rgba(255, 138, 128, 0.14);
-    --ds-warn: #FFB65C; --ds-warn-soft: rgba(255, 182, 92, 0.14);
-    --ds-hero: radial-gradient(120% 90% at 100% 0%, rgba(189, 235, 251, 0.28) 0%, rgba(189, 235, 251, 0) 55%), linear-gradient(150deg, #3D68F2 0%, #2950F4 55%, #1C38C2 100%);
-    --ds-glass: rgba(24, 40, 70, 0.62);
-    --ds-glass-strong: rgba(24, 40, 70, 0.84);
-    --ds-glass-line: rgba(255, 255, 255, 0.14);
-    --ds-glass-edge: rgba(0, 0, 0, 0.4);
-    --ds-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --ds-shadow-2: 0 14px 36px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
-    --ds-shadow-btn: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 6px 16px rgba(0, 0, 0, 0.35);
-    --ds-scrim: rgba(0, 0, 0, 0.55);
-    --ds-chart-1: #719DF6; --ds-chart-2: #4D78F3; --ds-chart-3: #99C2F8; --ds-chart-4: #BDEBFB;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --ds-bg: #0A1224;
-  --ds-bg-top: #13244A;
-  --ds-surface: #152340;
-  --ds-surface-2: #1C2C4D;
-  --ds-fill: rgba(113, 157, 246, 0.12);
-  --ds-fill-2: rgba(113, 157, 246, 0.2);
-  --ds-ink: #EEF3FF;
-  --ds-ink-2: #A9B6D0;
-  --ds-ink-3: #77859F;
-  --ds-line: rgba(189, 235, 251, 0.11);
-  --ds-line-2: rgba(189, 235, 251, 0.2);
-  --ds-tint: #8EB0FA;
-  --ds-tint-soft: rgba(113, 157, 246, 0.18);
-  --ds-btn: #3A62F5;
-  --ds-on-btn: #FFFFFF;
-  --ds-pos: #5DD68E; --ds-pos-soft: rgba(93, 214, 142, 0.14);
-  --ds-neg: #FF8A80; --ds-neg-soft: rgba(255, 138, 128, 0.14);
-  --ds-warn: #FFB65C; --ds-warn-soft: rgba(255, 182, 92, 0.14);
-  --ds-hero: radial-gradient(120% 90% at 100% 0%, rgba(189, 235, 251, 0.28) 0%, rgba(189, 235, 251, 0) 55%), linear-gradient(150deg, #3D68F2 0%, #2950F4 55%, #1C38C2 100%);
-  --ds-glass: rgba(24, 40, 70, 0.62);
-  --ds-glass-strong: rgba(24, 40, 70, 0.84);
-  --ds-glass-line: rgba(255, 255, 255, 0.14);
-  --ds-glass-edge: rgba(0, 0, 0, 0.4);
-  --ds-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --ds-shadow-2: 0 14px 36px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
-  --ds-shadow-btn: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 6px 16px rgba(0, 0, 0, 0.35);
-  --ds-scrim: rgba(0, 0, 0, 0.55);
-  --ds-chart-1: #719DF6; --ds-chart-2: #4D78F3; --ds-chart-3: #99C2F8; --ds-chart-4: #BDEBFB;
-  color-scheme: dark;
-}
-html { background: var(--ds-bg); }
-body {
-  font-family: var(--ds-font);
-  background: linear-gradient(180deg, var(--ds-bg-top) 0, var(--ds-bg) 340px) no-repeat, var(--ds-bg);
-  color: var(--ds-ink);
-  -webkit-font-smoothing: antialiased;
-  letter-spacing: -0.012em;
-}
-/* ── fin de los tokens comunes ── */
-/*DS:TOKENS:END*/
-
 :root{
-  /* Layout: una columna de teléfono — barra de edición fija arriba, planilla 10×4, resumen abajo, teclado numérico propio anclado al borde inferior */
-  --paper:var(--ds-bg);
-  --cell:var(--ds-surface);
-  --head:#E9EEF9;
-  --line:var(--ds-line);
-  --ink:var(--ds-ink);
-  --muted:var(--ds-ink-2);
-  --accent:var(--ds-tint);
-  --accent-fill:var(--ds-btn);
-  --on-accent:var(--ds-on-btn);
-  --sel:var(--ds-fill);
-  --head-on:var(--ds-fill-2);
-  --ref:var(--ds-warn);
-  --ref-fill:var(--ds-warn-soft);
-  --bad:var(--ds-neg);
-  --chip:var(--ds-fill-2);
-  --chip-on:var(--ds-surface);
-  --kb:#D8E0EE;
+  /* Layout: una columna de teléfono — barra de edición fija arriba, planilla 10×4, resumen abajo, teclado numérico propio anclado al borde inferior.
+     Colores: verdes y neutros actuales de Excel (verde #107C41, encabezados #F3F2F1, líneas #D1D1D1). */
+  --paper:#F3F2F1;
+  --cell:#FFFFFF;
+  --head:#F7F7F6;
+  --line:#D1D1D1;
+  --field-line:#C8C6C4;
+  --ink:#252525;
+  --muted:#605E5C;
+  --accent:#107C41;
+  --accent-fill:#107C41;
+  --on-accent:#FFFFFF;
+  --sel:rgba(16,124,65,.10);
+  --head-on:#DDEFE4;
+  --bad:#A4262C;
+  --chip:#E4E2E0;
+  --chip-on:#FFFFFF;
+  --r0:#185ABD; --rf0:rgba(24,90,189,.12);
+  --r1:#C4314B; --rf1:rgba(196,49,75,.11);
+  --r2:#8764B8; --rf2:rgba(135,100,184,.13);
+  --r3:#CA5010; --rf3:rgba(202,80,16,.12);
+  --kb:#D9D8D6;
   --key:#FFFFFF;
-  --key-fn:#B9C5DA;
-  --key-sh:rgba(24,45,74,.3);
-  --shadow:var(--ds-shadow-1);
-  --font:var(--ds-font);
-  --mono:var(--ds-font-mono);
+  --key-fn:#BDBBB9;
+  --key-sh:rgba(0,0,0,.26);
+  --shadow:0 1px 2px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.06);
+  --btn-sh:inset 0 1px 0 rgba(255,255,255,.22), 0 4px 12px rgba(16,124,65,.28);
+  --font:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --mono:ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --gl:max(16px, env(safe-area-inset-left, 0px));
   --gr:max(16px, env(safe-area-inset-right, 0px));
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --head:var(--ds-surface-2); --chip-on:#2B4070;
-    --kb:#0B1430; --key:#22355B; --key-fn:#162645; --key-sh:rgba(0,0,0,.5);
+    --paper:#1B1B1B; --cell:#292929; --head:#333130; --line:#3B3A39; --field-line:#5C5B59;
+    --ink:#E6E6E6; --muted:#A19F9D; --accent:#4FB87B; --accent-fill:#137C41; --on-accent:#FFFFFF;
+    --sel:rgba(79,184,123,.15); --head-on:#1F3A29; --bad:#E88B91; --chip:#333130; --chip-on:#4A4847;
+    --r0:#5DA3F0; --rf0:rgba(93,163,240,.17); --r1:#E88B91; --rf1:rgba(232,139,145,.16);
+    --r2:#B9A3F0; --rf2:rgba(185,163,240,.16); --r3:#F0A35E; --rf3:rgba(240,163,94,.16);
+    --kb:#141414; --key:#3B3A39; --key-fn:#292929; --key-sh:rgba(0,0,0,.5);
+    --shadow:0 1px 2px rgba(0,0,0,.4); --btn-sh:inset 0 1px 0 rgba(255,255,255,.14), 0 4px 12px rgba(0,0,0,.4);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --head:var(--ds-surface-2); --chip-on:#2B4070;
-  --kb:#0B1430; --key:#22355B; --key-fn:#162645; --key-sh:rgba(0,0,0,.5);
+  --paper:#1B1B1B; --cell:#292929; --head:#333130; --line:#3B3A39; --field-line:#5C5B59;
+  --ink:#E6E6E6; --muted:#A19F9D; --accent:#4FB87B; --accent-fill:#137C41; --on-accent:#FFFFFF;
+  --sel:rgba(79,184,123,.15); --head-on:#1F3A29; --bad:#E88B91; --chip:#333130; --chip-on:#4A4847;
+  --r0:#5DA3F0; --rf0:rgba(93,163,240,.17); --r1:#E88B91; --rf1:rgba(232,139,145,.16);
+  --r2:#B9A3F0; --rf2:rgba(185,163,240,.16); --r3:#F0A35E; --rf3:rgba(240,163,94,.16);
+  --kb:#141414; --key:#3B3A39; --key-fn:#292929; --key-sh:rgba(0,0,0,.5);
+  --shadow:0 1px 2px rgba(0,0,0,.4); --btn-sh:inset 0 1px 0 rgba(255,255,255,.14), 0 4px 12px rgba(0,0,0,.4);
   color-scheme:dark;
 }
 
@@ -199,7 +91,7 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
   margin-left:calc(-1 * var(--gl));margin-right:calc(-1 * var(--gr));padding-left:var(--gl);padding-right:var(--gr);
   padding-block:10px 10px;display:grid;gap:8px}
 .field{display:flex;align-items:center;gap:8px;height:48px;padding:0 6px 0 7px;background:var(--cell);
-  border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);transition:border-color .15s, box-shadow .15s}
+  border:1px solid var(--field-line);border-radius:14px;box-shadow:var(--shadow);transition:border-color .15s, box-shadow .15s}
 .field.editing{border-color:var(--accent);box-shadow:0 0 0 3px var(--sel), var(--shadow)}
 .ref{flex:none;font:600 13px/1 var(--mono);color:var(--ink);background:var(--chip);border-radius:8px;
   padding:8px 8px 7px;min-width:44px;text-align:center;letter-spacing:.02em;white-space:nowrap}
@@ -233,21 +125,29 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
   background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);
   touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .h{background:var(--head);color:var(--muted);font:500 11px/1 var(--mono);letter-spacing:.04em;display:grid;place-items:center;cursor:pointer}
-.h.on{color:var(--accent);font-weight:700;background:linear-gradient(var(--head-on),var(--head-on)),var(--head)}
+.h.on{color:var(--accent);font-weight:700;background:var(--head-on)}
+.h.on[data-col]{box-shadow:inset 0 -2px 0 var(--accent)}
+.h.on[data-row]{box-shadow:inset -2px 0 0 var(--accent)}
 .c{background:var(--cell);display:flex;align-items:center;padding:0 7px;min-width:0;font-size:15px;font-variant-numeric:tabular-nums;cursor:cell}
 .c span{display:block;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .c.n span{text-align:right}
 .c.fx{font-weight:600}
 .c.e span{text-align:center;color:var(--bad);font:600 11px var(--mono)}
 .c.in{background:linear-gradient(var(--sel),var(--sel)),var(--cell)}
-.c.rf{background:linear-gradient(var(--ref-fill),var(--ref-fill)),var(--cell)}
+.c.rf0{background:linear-gradient(var(--rf0),var(--rf0)),var(--cell)}
+.c.rf1{background:linear-gradient(var(--rf1),var(--rf1)),var(--cell)}
+.c.rf2{background:linear-gradient(var(--rf2),var(--rf2)),var(--cell)}
+.c.rf3{background:linear-gradient(var(--rf3),var(--rf3)),var(--cell)}
 .c.ed span{text-overflow:clip;text-align:left;font-weight:400}
 .c.ed.edn span{text-align:right}
 .c.ed span::after{content:"";display:inline-block;width:1.5px;height:1.05em;margin-left:1px;vertical-align:-.16em;background:var(--accent);animation:blink 1.05s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .ovl{position:absolute;inset:0;pointer-events:none}
 .selbox{position:absolute;z-index:2;border:2px solid var(--accent);border-radius:4px;transition:left .12s ease,top .12s ease,width .12s ease,height .12s ease}
-.refbox{position:absolute;z-index:1;border:1.5px dashed var(--ref);border-radius:4px}
+.refbox{position:absolute;z-index:1;border:1.5px dashed var(--r0);border-radius:4px}
+.refbox.r1{border-color:var(--r1)}
+.refbox.r2{border-color:var(--r2)}
+.refbox.r3{border-color:var(--r3)}
 
 /* Resumen */
 .status{margin-top:16px;padding:0 2px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
@@ -277,7 +177,7 @@ body.padopen .app{padding-bottom:calc(var(--padh, 300px) + 24px)}
 .keys button.fn{background:var(--key-fn);font-size:21px}
 .keys button.op{color:var(--accent);font-size:27px}
 .keys button.abc{font:600 15px/1 var(--font);letter-spacing:.05em}
-.keys button.enter{grid-column:5;grid-row:3 / span 2;background:var(--accent-fill);color:var(--on-accent);box-shadow:var(--ds-shadow-btn);
+.keys button.enter{grid-column:5;grid-row:3 / span 2;background:var(--accent-fill);color:var(--on-accent);box-shadow:var(--btn-sh);
   font:600 16px/1 var(--font);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
 .keys button.down{background:var(--key-fn)}
 .keys button.fn.down{background:var(--key)}
@@ -945,7 +845,7 @@ function paint(){
       if(raw[r][c][0]==='=') cls+=' fx';
     }
     if(multi && !isAct && r>=sel.r1&&r<=sel.r2&&c>=sel.c1&&c<=sel.c2) cls+=' in';
-    for(var i=0;i<refs.length;i++){ var q=refs[i]; if(r>=q.r1&&r<=q.r2&&c>=q.c1&&c<=q.c2){ cls+=' rf'; break; } }
+    for(var i=0;i<refs.length;i++){ var q=refs[i]; if(r>=q.r1&&r<=q.r2&&c>=q.c1&&c<=q.c2){ cls+=' rf'+(i%4); break; } }
     if(el.className!==cls) el.className=cls;
     if(sp.textContent!==txt) sp.textContent=txt;
     if(editing && isAct && cls.indexOf('edn')<0) sp.scrollLeft=sp.scrollWidth;
@@ -955,7 +855,7 @@ function paint(){
   place(selbox, multi ? sel : one(act));
   refs.forEach(function(q,i){
     var b=refPool[i]; if(!b){ b=mk('refbox'); ovl.appendChild(b); refPool.push(b); }
-    b.hidden=false; place(b,q);
+    b.className='refbox r'+(i%4); b.hidden=false; place(b,q);
   });
   for(var j=refs.length;j<refPool.length;j++) refPool[j].hidden=true;
 

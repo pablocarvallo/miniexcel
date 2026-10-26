@@ -5,16 +5,16 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#EFF3FB",
-  "theme_color": "#EFF3FB",
+  "background_color": "#F3F2F1",
+  "theme_color": "#F3F2F1",
   "icons": [
     {
-      "src": "icon-180.png?v=1",
+      "src": "icon-180.png?v=2",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png?v=1",
+      "src": "icon-512.png?v=2",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
