@@ -268,6 +268,7 @@ var sheet=$('sheet'), wrap=$('wrap'), ovl=$('ovl'), selbox=$('selbox'), bar=$('b
 var segBtns=Array.prototype.slice.call(document.querySelectorAll('.seg button'));
 
 var raw=[]; for(var i=0;i<R;i++){ raw.push(['','','','']); }
+var booted=false;
 var vals=[];
 var act={r:0,c:0}, sel={r1:0,c1:0,r2:0,c2:0};
 var editing=false, mode='num', sticky='num', numVal='';
@@ -443,8 +444,9 @@ function recalc(){
     st[k]=1; var v=compute(raw[r][c],get); vals[r][c]=v; st[k]=2; return v;
   }
   for(var r=0;r<R;r++) for(var c=0;c<C;c++) get(r,c);
+  if(booted) saveNow();
 }
-function store(r,c,v){
+function normalize(v){
   v=(v||'').trim();
   if(v==='-'||v===','||v==='=') v='';
   if(v[0]==='='){
@@ -454,8 +456,32 @@ function store(r,c,v){
   } else if(v && v[0]!=="'"){
     var n=parseNum(v); if(n!==null) v=canon(n);
   }
-  raw[r][c]=v;
+  return v;
 }
+function store(r,c,v){ raw[r][c]=normalize(v); }
+
+/* ---------- Guardado en el dispositivo ---------- */
+/* Como la Calculadora de iOS: la planilla queda guardada en este iPhone hasta que se borre */
+var KEY='miniexcel:planilla:v1';
+function saveNow(){
+  var cells=raw.map(function(row){ return row.slice(); });
+  if(editing){ var v=normalize(curVal()); if(v!==raw[act.r][act.c]) cells[act.r][act.c]=v; }
+  try{ localStorage.setItem(KEY, JSON.stringify({cells:cells, act:act})); }catch(_){}
+}
+function loadSaved(){
+  try{
+    var d=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(!d || !Array.isArray(d.cells)) return;
+    for(var r=0;r<R;r++) for(var c=0;c<C;c++){
+      var v=d.cells[r] && d.cells[r][c];
+      raw[r][c] = typeof v==='string' ? v : '';
+    }
+    if(d.act && d.act.r>=0 && d.act.r<R && d.act.c>=0 && d.act.c<C){ act={r:d.act.r|0,c:d.act.c|0}; sel=one(act); }
+  }catch(_){}
+}
+try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function(){}); }catch(_){}
+document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') saveNow(); });
+window.addEventListener('pagehide',saveNow);
 
 /* ---------- Teclado sugerido ---------- */
 function kindOf(s){ if(!s) return null; if(s[0]==='=') return 'fx'; if(s[0]==="'") return 'txt'; return parseNum(s)!==null ? 'num' : 'txt'; }
@@ -819,7 +845,7 @@ function renderStatus(){
     html+='<div class="notice"><span>'+(k===1?'1 celda borrada':k+' celdas borradas')+'</span><button type="button" data-act="undo">Deshacer</button></div>';
   }
   if(empty){
-    html+='<p class="hint">Toca una celda para escribir y usa <b>Intro</b> para pasar a la siguiente. Para una fórmula, toca <b>=</b> y arma la cuenta con <b>+ − × ÷</b>, tocando las celdas que quieras usar. <b>Suma</b> y <b>Promedio</b> suman o promedian un rango.</p>';
+    html+='<p class="hint">Toca una celda para escribir y usa <b>Intro</b> para pasar a la siguiente. Para una fórmula, toca <b>=</b> y arma la cuenta con <b>+ − × ÷</b>, tocando las celdas que quieras usar. <b>Suma</b> y <b>Promedio</b> suman o promedian un rango.</p><p class="hint">Todo queda guardado en este iPhone, aunque cierres la app o lo apagues. Para vaciar la planilla, toca la esquina superior izquierda y luego la papelera.</p>';
   } else {
     var s=stats();
     html+='<div class="lbl"><b>'+s.label+'</b><span>'+(s.n===0?'sin cifras':s.n===1?'1 cifra':s.n+' cifras')+'</span></div>'+
@@ -873,7 +899,7 @@ function paint(){
   renderStatus();
 }
 
-recalc(); paint();
+loadSaved(); recalc(); booted=true; paint();
 window.addEventListener('resize',function(){
   if(pad.classList.contains('open')) document.documentElement.style.setProperty('--padh', pad.offsetHeight+'px');
   paint();

@@ -4,7 +4,7 @@ Planilla de cálculo personal para iPhone: 10 filas y 4 columnas, con Suma y Pro
 
 Abrir en Safari en https://pablocarvallo.github.io/miniexcel/ y elegir Compartir → «Agregar a inicio».
 
-La planilla no se guarda: al cerrar la app vuelve a quedar vacía.
+La planilla se guarda sola en el iPhone cada vez que cambia algo, como la Calculadora de iOS: sigue ahí al cerrar la app o apagar el teléfono, hasta que la borres. Para vaciarla, toca la esquina superior izquierda de la planilla (selecciona todo) y luego la papelera.
 
 ## Uso
 
